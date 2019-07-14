@@ -54,19 +54,16 @@ async def killdabot(event):
                 "Bot shut down")
         await event.client.disconnect()
 
-# Copyright(c) Kandnub | 2019
 @register(outgoing=True, pattern="^.restart$")
 async def revivedabot(restart):
     """ For .restart command, restart the bot down."""
     if not restart.text[0].isalpha():
+        # Copyright(c) Kandnub | 2019
         await restart.edit("`BRB... *PornHub intro*`")
-        #bye = os.getpid()
-        #bash = f"#!/bin/bash/\nkill -9 {bye}\npython3 -m userbot"
-        #f = open("restart.sh", "w+")
-        #f.write(bash)
-        #f.close()
-        #os.popen("bash restart.sh")
+        await restart.client.disconnect()
+        # https://archive.is/im3rt
         os.execl(sys.executable, sys.executable, *sys.argv)
+        # You probably don't need it but whatever
         quit()
 
 @register(outgoing=True, pattern="^.community$")
