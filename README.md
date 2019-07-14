@@ -46,7 +46,7 @@ I would like to thank people who assisted me throughout this project:
 * [@deletescape](https://github.com/deletescape)
 * [@songotenks69](https://github.com/songotenks69)
 * [@Ovenoboyo](https://github.com/Ovenoboyo)
-* [SphericalKat](https://github.com/ATechnoHazard)
+* [@SphericalKat](https://github.com/ATechnoHazard)
 * [@nitanmarcell](https://www.github.com/nitanmarcel)
 * [@spechide](https://www.github.com/spechide)
 * [@Jeepeo](https://github.com/Jeepeo)
