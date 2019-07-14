@@ -1,6 +1,6 @@
 {
     "name":"Telegram Userbot",
-    "description":"Custom kang of the famous Paperplane userbot by @RaphielGang with some of my fav modules.",
+    "description":"A modular Telegram userbot running on Python 3.6+ with an sqlalchemy database.",
     "logo":"https://i.imgur.com/ATSG4w3.png",
     "keywords":[
         "telegram",
@@ -9,7 +9,7 @@
         "modular",
         "productivity"
     ],
-    "repository":"https://github.com/AvinashReddy3108/Paperplane-Extended",
+    "repository":"https://github.com/AvinashReddy3108/PaperplaneExtended",
     "website":"https://github.com/RaphielGang/Telegram-UserBot/wiki",
     "success_url":"https://t.me/userbot_announcements",
     "env":{
