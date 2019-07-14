@@ -89,7 +89,7 @@ async def creator(e):
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("You might want to have a look at the [README.md](https://github.com/AvinashReddy3108/Paperplane-Extended/blob/master/README.md) file.")
+        await e.edit("You might want to have a look at the [README.md](https://github.com/AvinashReddy3108/PaperplaneExtended/blob/master/README.md) file.")
 
 #
 # Copyright (c) Gegham Zakaryan | 2019
@@ -111,7 +111,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     if not wannasee.text[0].isalpha() and wannasee.text[0] not in ("/", "#", "@", "!"):
-        await wannasee.edit("Click [here](https://github.com/AvinashReddy3108/Paperplane-Extended) to open Paperplane Extended's GitHub page.")
+        await wannasee.edit("Click [here](https://github.com/AvinashReddy3108/PaperplaneExtended) to open Paperplane Extended's GitHub page.")
 
 CMD_HELP.update({
     'random': '.random <item1> <item2> ... <itemN>\
