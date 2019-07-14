@@ -69,13 +69,19 @@ async def revivedabot(restart):
         os.execl(sys.executable, sys.executable, *sys.argv)
         quit()
 
+@register(outgoing=True, pattern="^.community$")
+async def bot_community(community):
+    """ For .support command, just returns the group link. """
+    if not community.text[0].isalpha() and community.text[0] not in ("/", "#", "@", "!"):
+        await community.edit("Join the awesome Paperplane userbot community: @userbot_support\n\
+        Be warned that this is a fork of their project and you may get limited support for bugs.")
+        
 @register(outgoing=True, pattern="^.support$")
 async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     if not wannahelp.text[0].isalpha() and wannahelp.text[0] not in ("/", "#", "@", "!"):
-        await wannahelp.edit("Join the awesome Paperplane userbot community: @userbot_support\n\
-        Be warned that this is a fork of their project and you may get limited support for bugs.")
-
+        await wannahelp.edit("Join the Paperplane Extended Channel: @PaperplaneExtendedNews")
+        
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -124,6 +130,10 @@ hear Windows XP shutdown sound... but you don't."
 CMD_HELP.update({
     'support': ".support\
 \nUsage: If you need help, use this command."
+})
+CMD_HELP.update({
+    'community': ".community\
+\nUsage: Join the awesome Paperplane userbot community !!"
 })
 CMD_HELP.update({
     'repo': '.repo\
