@@ -14,7 +14,7 @@ from distutils.util import strtobool as sb
 from dotenv import load_dotenv
 from requests import get
 from telethon import TelegramClient
-
+from telethon.sessions import StringSession
 
 load_dotenv("config.env")
 
@@ -48,9 +48,12 @@ if CONFIG_CHECK:
     LOGS.error("Please remove the line mentioned in the first hashtag from the config.env file")
     quit(1)
 
+
 API_KEY = os.environ.get("API_KEY", None)
 
 API_HASH = os.environ.get("API_HASH", None)
+
+STRING_SESSION = os.environ.get("STRING_SESSION", None)
 
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
 
@@ -65,6 +68,10 @@ CONSOLE_LOGGER_VERBOSE = sb(
     )
 
 DB_URI = os.environ.get("DATABASE_URL", None)
+
+CHROME_DRIVER = os.environ.get("CHROME_DRIVER", None)
+
+GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN", None)
 
 SCREENSHOT_LAYER_ACCESS_KEY = os.environ.get(
     "SCREENSHOT_LAYER_ACCESS_KEY", None
@@ -85,8 +92,13 @@ SPOTIFY_PASS = os.environ.get("SPOTIFY_PASS", None)
 SPOTIFY_BIO_PREFIX = os.environ.get("SPOTIFY_BIO_PREFIX", None)
 DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
 
-# pylint: disable=invalid-name
-bot = TelegramClient("userbot", API_KEY, API_HASH)
+
+if STRING_SESSION:
+    # pylint: disable=invalid-name
+    bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
+else:
+    # pylint: disable=invalid-name
+    bot = TelegramClient("userbot", API_KEY, API_HASH)
 
 if os.path.exists("learning-data-root.check"):
     os.remove("learning-data-root.check")
@@ -103,8 +115,6 @@ SNIPE_TEXT = ""
 COUNT_MSG = 0
 BRAIN_CHECKER = []
 USERS = {}
-WIDE_MAP = dict((i, i + 0xFEE0) for i in range(0x21, 0x7F))
-WIDE_MAP[0x20] = 0x3000
 COUNT_PM = {}
 LASTMSG = {}
 ISAFK = False
@@ -113,5 +123,7 @@ SNIPE_ID = 0
 MUTING_USERS = {}
 MUTED_USERS = {}
 CMD_HELP = {}
-AFKREASON = "no reason"
-DISABLE_RUN = False
+ZALG_LIST = [["̖"," ̗"," ̘"," ̙"," ̜"," ̝"," ̞"," ̟"," ̠"," ̤"," ̥"," ̦"," ̩"," ̪"," ̫"," ̬"," ̭"," ̮"," ̯"," ̰"," ̱"," ̲"," ̳"," ̹"," ̺"," ̻"," ̼"," ͅ"," ͇"," ͈"," ͉"," ͍"," ͎"," ͓"," ͔"," ͕"," ͖"," ͙"," ͚"," ",],
+    [" ̍"," ̎"," ̄"," ̅"," ̿"," ̑"," ̆"," ̐"," ͒"," ͗"," ͑"," ̇"," ̈"," ̊"," ͂"," ̓"," ̈́"," ͊"," ͋"," ͌"," ̃"," ̂"," ̌"," ͐"," ́"," ̋"," ̏"," ̽"," ̉"," ͣ"," ͤ"," ͥ"," ͦ"," ͧ"," ͨ"," ͩ"," ͪ"," ͫ"," ͬ"," ͭ"," ͮ"," ͯ"," ̾"," ͛"," ͆"," ̚",],
+    [" ̕"," ̛"," ̀"," ́"," ͘"," ̡"," ̢"," ̧"," ̨"," ̴"," ̵"," ̶"," ͜"," ͝"," ͞"," ͟"," ͠"," ͢"," ̸"," ̷"," ͡",]]
+AFKREASON = None

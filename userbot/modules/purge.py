@@ -36,7 +36,7 @@ async def fastpurger(purg):
             purg.chat_id,
             "`Fast purge complete!\n`Purged "
             + str(count)
-            + " messages. **This auto-generated message shall be self destructed in 2 seconds.**",
+            + " messages.",
         )
 
         if BOTLOG:
@@ -66,14 +66,14 @@ async def purgeme(delme):
             delme.chat_id,
             "`Purge complete!` Purged "
             + str(count)
-            + " messages. **This auto-generated message shall be self destructed in 2 seconds.**",
+            + " messages.",
         )
         if BOTLOG:
             await delme.client.send_message(
                 BOTLOG_CHATID, "Purge of " +
                 str(count) + " messages done successfully."
             )
-        sleep(2)
+        await sleep(2)
         i = 1
         await smsg.delete()
 
@@ -88,19 +88,19 @@ async def delete_it(delme):
                 await msg_src.delete()
                 await delme.delete()
                 if BOTLOG:
-                    await delme.send_message(
+                    await delme.client.send_message(
                         BOTLOG_CHATID,
                         "Deletion of message was successful"
                     )
             except rpcbaseerrors.BadRequestError:
                 if BOTLOG:
-                    await delme.send_message(
+                    await delme.client.send_message(
                         BOTLOG_CHATID,
                         "Well, I can't delete a message"
                     )
 
 
-@register(outgoing=True, pattern="^.editme")
+@register(outgoing=True, pattern="^.edit")
 async def editer(edit):
     """ For .editme command, edit your last message. """
     if not edit.text[0].isalpha() and edit.text[0] not in ("/", "#", "@", "!"):
@@ -116,7 +116,7 @@ async def editer(edit):
                 break
             i = i + 1
         if BOTLOG:
-            await edit.send_message(BOTLOG_CHATID, "Edit query was executed successfully")
+            await edit.client.send_message(BOTLOG_CHATID, "Edit query was executed successfully")
 
 
 @register(outgoing=True, pattern="^.sd")
@@ -126,15 +126,9 @@ async def selfdestruct(destroy):
         message = destroy.text
         counter = int(message[4:6])
         text = str(destroy.text[6:])
-        text = (
-            text
-            + "\n\n`This message shall be self-destructed in "
-            + str(counter)
-            + " seconds`"
-        )
         await destroy.delete()
         smsg = await destroy.client.send_message(destroy.chat_id, text)
-        sleep(counter)
+        await sleep(counter)
         await smsg.delete()
         if BOTLOG:
             await destroy.client.send_message(BOTLOG_CHATID, "sd query done successfully")
@@ -155,7 +149,7 @@ CMD_HELP.update({
 })
 
 CMD_HELP.update({
-    'editme': ".editme <newmessage>\
+    'edit': ".edit <newmessage>\
 \nUsage: Edits the text you replied to with newtext."
 })
 
