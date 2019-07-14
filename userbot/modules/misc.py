@@ -73,8 +73,7 @@ async def revivedabot(restart):
 async def bot_community(community):
     """ For .support command, just returns the group link. """
     if not community.text[0].isalpha() and community.text[0] not in ("/", "#", "@", "!"):
-        await community.edit("Join the awesome Paperplane userbot community: @userbot_support\n\
-        Be warned that this is a fork of their project and you may get limited support for bugs.")
+        await community.edit("Join the awesome Paperplane userbot community: @userbot_support\nBe warned that this is a fork of their project and you may get limited support for bugs.")
         
 @register(outgoing=True, pattern="^.support$")
 async def bot_support(wannahelp):
