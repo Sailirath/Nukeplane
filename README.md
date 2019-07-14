@@ -27,7 +27,7 @@
 
 This is a fork of the famous [Paperplane](https://github.com/RaphielGang/Telegram-UserBot) userbot made by the awesome [RaphielGang](https://github.com/RaphielGang) team with some extras from the Telegram userbot community.
 
-For setting up and configuring this userbot, you can checkout the [Wiki](https://github.com/AvinashReddy3108/Paperplane-Extended/wiki) [WIP]
+For setting up and configuring this userbot, you can checkout the [Wiki](https://github.com/AvinashReddy3108/PaperplaneExtended/wiki) [WIP]
 
 If you just want to stay in the loop about new features or  
 announcements you can join the [news channel](https://t.me/PaperplaneExtendedNews).
