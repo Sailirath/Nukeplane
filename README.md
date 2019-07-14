@@ -40,17 +40,21 @@ Please head to the wiki on instructions to setting it up!
 
 I would like to thank people who assisted me throughout this project:
 
-*   [@YouTwitFace](https://github.com/YouTwitFace)
-*   [@TheDevXen](https://github.com/TheDevXen)
-*   [@Skittles9823](https://github.com/Skittles9823)
-*   [@deletescape](https://github.com/deletescape)
-*   [@songotenks69](https://github.com/songotenks69)
-*   [@Ovenoboyo](https://github.com/Ovenoboyo)
-*   [SphericalKat](https://github.com/ATechnoHazard)
-*   [@nitanmarcell](https://www.github.com/nitanmarcel)
-*   [@spechide](https://www.github.com/spechide)
-*   [@Jeepeo](https://github.com/Jeepeo)
-*   [@shxnpie](https://github.com/shxnpie)
+* [@YouTwitFace](https://github.com/YouTwitFace)
+* [@TheDevXen](https://github.com/TheDevXen)
+* [@Skittles9823](https://github.com/Skittles9823)
+* [@deletescape](https://github.com/deletescape)
+* [@songotenks69](https://github.com/songotenks69)
+* [@Ovenoboyo](https://github.com/Ovenoboyo)
+* [SphericalKat](https://github.com/ATechnoHazard)
+* [@nitanmarcell](https://www.github.com/nitanmarcel)
+* [@spechide](https://www.github.com/spechide)
+* [@Jeepeo](https://github.com/Jeepeo)
+* [@shxnpie](https://github.com/shxnpie)
+* [@rupansh](https://github.com/rupansh)
+* [@zakaryan2004](https://github.com/zakaryan2004)
+* [@kandnub](https://github.com/kandnub)
+* [@pqhaz](https://github.com/pqhaz)
 
 and many more people and projects who aren’t mentioned here.
 
