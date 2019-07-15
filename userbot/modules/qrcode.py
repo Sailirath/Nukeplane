@@ -9,7 +9,7 @@
 """ Userbot module containing commands related to QR Codes. """
 
 import os
-from asyncio import sleep
+import asyncio
 from datetime import datetime
 
 from requests import post, get
@@ -72,23 +72,23 @@ async def parseqr(qr_e):
 
 
 @register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
-async def make_qr(qrcode):
+async def make_qr(makeqr):
     """ For .makeqr command, make a QR Code containing the given content. """
-    if not qrcode.text[0].isalpha() and qrcode.text[0] not in (
+    if not makeqr.text[0].isalpha() and makeqr.text[0] not in (
             "/", "#", "@", "!"):
-        if qrcode.fwd_from:
+        if makeqr.fwd_from:
             return
         start = datetime.now()
-        input_str = qrcode.pattern_match.group(1)
+        input_str = makeqr.pattern_match.group(1)
         message = "SYNTAX: `.makeqr <long text to include>`"
         reply_msg_id = None
         if input_str:
             message = input_str
-        elif qrcode.reply_to_msg_id:
-            previous_message = await qrcode.get_reply_message()
+        elif makeqr.reply_to_msg_id:
+            previous_message = await makeqr.get_reply_message()
             reply_msg_id = previous_message.id
             if previous_message.media:
-                downloaded_file_name = await qrcode.client.download_media(
+                downloaded_file_name = await makeqr.client.download_media(
                     previous_message, progress_callback=progress
                 )
                 m_list = None
@@ -111,17 +111,17 @@ async def make_qr(qrcode):
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
         img.save("img_file.webp", "PNG")
-        await qrcode.client.send_file(
-            qrcode.chat_id,
+        await makeqr.client.send_file(
+            makeqr.chat_id,
             "img_file.webp",
             reply_to=reply_msg_id,
             progress_callback=progress,
         )
         os.remove("img_file.webp")
         duration = (datetime.now() - start).seconds
-        await qrcode.edit("Created QRCode in {} seconds".format(duration))
-        await sleep(5)
-        await qrcode.delete()
+        await makeqr.edit("Created QRCode in {} seconds".format(duration))
+        await asyncio.sleep(5)
+        await makeqr.delete()
 
 
 CMD_HELP.update({
