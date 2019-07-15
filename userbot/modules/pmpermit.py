@@ -49,9 +49,11 @@ async def permitpm(event):
                     # If the message doesn't same as previous one
                     # Send the Unapproved Message again
                     if event.text != prevmsg:
+                        await event.delete()
                         await event.reply(UNAPPROVED_MSG)
                     LASTMSG.update({event.chat_id: event.text})
                 else:
+                    await event.delete()
                     await event.reply(UNAPPROVED_MSG)
                     LASTMSG.update({event.chat_id: event.text})
 
@@ -63,6 +65,7 @@ async def permitpm(event):
                     COUNT_PM[event.chat_id] = COUNT_PM[event.chat_id] + 1
 
                 if COUNT_PM[event.chat_id] > 4:
+                    await event.delete()
                     await event.respond(
                         "`You were spamming my master's PM, which I don't like.`"
                         " `I'mma Report Spam.`"
@@ -130,7 +133,7 @@ async def notifoff(noff_event):
         except AttributeError:
             return
         addgvar("NOTIF_OFF", True)
-        await noff_event.edit("`Notifications silenced!`")
+        await noff_event.edit("`Notifications from unapproved PM's are silenced!`")
 
 
 @register(outgoing=True, pattern="^.notifon$")
@@ -142,7 +145,7 @@ async def notifon(non_event):
         except AttributeError:
             return
         delgvar("NOTIF_OFF")
-        await non_event.edit("`Notifications unmuted!`")
+        await non_event.edit("`Notifications from unapproved PM's unmuted!`")
 
 
 @register(outgoing=True, pattern="^.approve$")
