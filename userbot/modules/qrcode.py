@@ -12,7 +12,8 @@ import os
 import asyncio
 from datetime import datetime
 
-from requests import post, get
+import qrcode
+from bs4 import BeautifulSoup
 
 from userbot import CMD_HELP
 from userbot.events import register
