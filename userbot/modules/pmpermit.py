@@ -50,13 +50,15 @@ async def permitpm(event):
                     # Send the Unapproved Message again
                     if event.text != prevmsg:
                         pm_warn = await event.reply(UNAPPROVED_MSG)
+                    LASTMSG.update({event.chat_id: event.text})
+                else:
+                    if pm_warn:
+                        pm_warn.delete()
+                        pm_warn = await event.reply(UNAPPROVED_MSG)
                         LASTMSG.update({event.chat_id: event.text})
                     else:
-                        if pm_warn:
-                            pm_warn.delete()
-                            pm_warn = await event.reply(UNAPPROVED_MSG)
-                        else:
-                            pm_warn = await event.reply(UNAPPROVED_MSG)
+                        pm_warn = await event.reply(UNAPPROVED_MSG)
+                        LASTMSG.update({event.chat_id: event.text})
 
                 if notifsoff:
                     await event.client.send_read_acknowledge(event.chat_id)
