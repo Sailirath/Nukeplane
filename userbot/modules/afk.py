@@ -5,14 +5,16 @@
 #
 """ Userbot module which contains afk-related commands """
 
-import time
 import random
+from asyncio import sleep
 
 from telethon.events import StopPropagation
 
-from userbot import (AFKREASON, COUNT_MSG, CMD_HELP, ISAFK, BOTLOG, BOTLOG_CHATID,
+from userbot import (COUNT_MSG, CMD_HELP, BOTLOG, BOTLOG_CHATID,
                      USERS)
 from userbot.events import register
+
+from userbot.modules.sql_helper.globals import gvarstatus, addgvar, delgvar
 
 AFKSTR = [
         "I'll be back in a couple of minutes... If not, read this status again!",
@@ -31,7 +33,7 @@ AFKSTR = [
         "Hello, welcome to my away message, how may I ignore you today?",
         "I'm away over 7 seas and 7 countries, 7 waters and 7 continents, 7 mountains and 7 hills, 7 plains and 7 mounds, 7 pools and 7 lakes, 7 springs and 7 meadows, 7 cities and 7 neighborhoods, 7 blocks and 7 houses... Where not even your messages can reach me!",
         "I'm away from the keyboard at the moment, but if you'll scream loud enough at your screen, I might just hear you.",
-        "I went that away ---->",
+        "I went that way ---->",
         "Please leave a message and make me feel even more important than I already am.",
         "I am not here so stop writing to me, or else you will find yourself with a screen full of your own messages.",
         "If I were here, I'd tell you where I am. But I'm not, so ask me when I return...",
@@ -41,6 +43,9 @@ AFKSTR = [
         "I bet you were expecting an away message!",
         "I am not here right now...but if I was... wouldn't that be awesome?",
 ]
+
+ISAFK = gvarstatus("AFK_STATUS")
+AFKREASON = gvarstatus("AFK_REASON")
 
 @register(incoming=True, disable_edited=True)
 async def mention_afk(mention):
@@ -123,14 +128,15 @@ async def set_afk(afk_e):
         message = afk_e.text
         global ISAFK
         global AFKREASON
-        AFKREASON = afk_e.pattern_match.group(1)
-        if AFKREASON:
-            await afk_e.edit(f"Going AFK !!\nReason: {AFKREASON}")
+        REASON = afk_e.pattern_match.group(1)
+        if AFK_STRING:
+            addgvar("AFK_REASON", REASON)
+            await afk_e.edit(f"Going AFK !!\nReason: {REASON}")
         else:
             await afk_e.edit("Going AFK !!")
         if BOTLOG:
             await afk_e.client.send_message(BOTLOG_CHATID, "You went AFK!")
-        ISAFK = True
+        addgvar("AFK_STATUS", True)
         raise StopPropagation
 
 
@@ -142,14 +148,14 @@ async def type_afk_is_not_true(notafk):
     global USERS
     global AFKREASON
     if ISAFK:
-        ISAFK = False
+        delgvar("AFK_STATUS")
         await notafk.respond("I'm no longer AFK.")
         afk_info = await notafk.respond(
             "`You recieved " +
             str(COUNT_MSG) +
             " messages while you were away. Check log for more details.`"
         )
-        time.sleep(4)
+        await sleep(4)
         await afk_info.delete()
         if BOTLOG:
             await notafk.client.send_message(
@@ -177,7 +183,7 @@ async def type_afk_is_not_true(notafk):
                 )
         COUNT_MSG = 0
         USERS = {}
-        AFKREASON = None
+        delgvar("AFKREASON")
 
 CMD_HELP.update({
     "afk": ".afk <reason> (reason is optional)\

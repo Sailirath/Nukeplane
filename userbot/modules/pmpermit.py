@@ -26,7 +26,7 @@ UNAPPROVED_MSG = ("`Hello! This is a bot.\n\n`"
 
 @register(incoming=True, disable_edited=True)
 async def permitpm(event):
-    """ Permits people from PMing you without approval. \
+    """ Prohibits people from PMing you without approval. \
         Will block retarded nibbas automatically. """
     if PM_AUTO_BAN:
         if event.sender_id in BRAIN_CHECKER:
@@ -49,12 +49,14 @@ async def permitpm(event):
                     # If the message doesn't same as previous one
                     # Send the Unapproved Message again
                     if event.text != prevmsg:
-                        await event.delete()
-                        await event.reply(UNAPPROVED_MSG)
+                        if pm_warn:
+                            pm_warn.delete()
+                            pm_warn = await event.reply(UNAPPROVED_MSG)
+                        else:
+                            pm_warn = await event.reply(UNAPPROVED_MSG)
                     LASTMSG.update({event.chat_id: event.text})
                 else:
-                    await event.delete()
-                    await event.reply(UNAPPROVED_MSG)
+                    pm_warn = await event.reply(UNAPPROVED_MSG)
                     LASTMSG.update({event.chat_id: event.text})
 
                 if notifsoff:
@@ -103,11 +105,12 @@ async def permitpm(event):
 @register(disable_edited=True, outgoing=True)
 async def auto_accept(event):
     """ Will approve nibbas automatically if you texted them first. """
-    try:
-        from userbot.modules.sql_helper.pm_permit_sql import is_approved
-        from userbot.modules.sql_helper.pm_permit_sql import approve
-    except AttributeError:
-        return
+    if event.is_private and not (await event.get_sender()).bot:
+        try:
+            from userbot.modules.sql_helper.pm_permit_sql import is_approved
+            from userbot.modules.sql_helper.pm_permit_sql import approve
+        except AttributeError:
+            return
 
     chat = await event.get_chat()
     if isinstance(chat, User):

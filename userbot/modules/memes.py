@@ -387,7 +387,7 @@ async def kek(keks):
     for i in range(1, 15):
         time.sleep(0.3)
         await keks.edit(":" + uio[i % 2])
-        
+
 @register(outgoing=True, pattern=r"^.coinflip (.*)")
 async def _(event):
     if event.fwd_from:
@@ -412,7 +412,7 @@ async def _(event):
             await event.edit("The coin landed on: **Tails**.")
     else:
         await event.edit("Gimme another coin, this one fake AF !!")
-        
+
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 async def who(event):
     """ slaps a user, or get slapped if not a reply. """
@@ -491,7 +491,7 @@ async def lol(lel):
     for _ in range(10):
         okay = okay[:-1] + "_-"
         await lel.edit(okay)
-        
+
 @register(outgoing=True, pattern="^.decide$")
 async def _(event):
     if event.fwd_from:
@@ -507,7 +507,7 @@ async def _(event):
         file=r["image"]
     )
     await event.delete()
-    
+
 @register(outgoing=True, pattern="^;_;$")
 async def fun(e):
     t = ";__;"
@@ -519,9 +519,7 @@ async def fun(e):
 async def cry(e):
     """ y u du dis, i cry everytime !! """
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        index = random.randint(0, len(CRI))
-        reply_text = CRI[index]
-        await e.edit(reply_text)
+        await e.edit(random.choice(CRI))
 
 @register(outgoing=True, pattern="^.cp(?: |$)(.*)")
 async def copypasta(cp_e):
@@ -573,7 +571,7 @@ async def vapor(vpr):
         else:
             await vpr.edit("`Ｇｉｖｅ ｓｏｍｅ ｔｅｘｔ ｆｏｒ ｖａｐｏｒ！`")
             return
-            
+
         for charac in message:
             if 0x21 <= ord(charac) <= 0x7F:
                 reply_text.append(chr(ord(charac) + 0xFEE0))
@@ -625,7 +623,7 @@ async def zal(zgfy):
                 "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
             )
             return
-            
+
         for charac in message:
             if not charac.isalpha():
                 reply_text.append(charac)
@@ -653,9 +651,7 @@ async def zal(zgfy):
 async def hoi(hello):
     """ Greet everyone! """
     if not hello.text[0].isalpha() and hello.text[0] not in ("/", "#", "@", "!"):
-        index = random.randint(0, len(HELLOSTR))
-        reply_text = HELLOSTR[index]
-        await hello.edit(reply_text)
+        await hello.edit(random.choice(HELLOSTR))
 
 
 @register(outgoing=True, pattern="^.owo(?: |$)(.*)")
@@ -686,18 +682,14 @@ async def faces(owo):
 async def react_meme(react):
     """ Make your userbot react to everything. """
     if not react.text[0].isalpha() and react.text[0] not in ("/", "#", "@", "!"):
-        index = random.randint(0, len(FACEREACTS))
-        reply_text = FACEREACTS[index]
-        await react.edit(reply_text)
+        await react.edit(random.choice(FACEREACTS))
 
 
 @register(outgoing=True, pattern="^.shg$")
 async def shrugger(shg):
     r""" ¯\_(ツ)_/¯ """
     if not shg.text[0].isalpha() and shg.text[0] not in ("/", "#", "@", "!"):
-        index = random.randint(0, len(SHGS))
-        reply_text = SHGS[index]
-        await shg.edit(reply_text)
+        await shg.edit(random.choice(SHGS))
 
 
 @register(outgoing=True, pattern="^.runs$")
@@ -705,9 +697,7 @@ async def runner_lol(run):
     """ Run, run, RUNNN! """
     if not DISABLE_RUN:
         if not run.text[0].isalpha() and run.text[0] not in ("/", "#", "@", "!"):
-            index = random.randint(0, len(RUNSREACTS) - 1)
-            reply_text = RUNSREACTS[index]
-            await run.edit(reply_text)
+            await run.edit(random.choice(RUNSREACTS))
 
 
 @register(outgoing=True, pattern="^.disable runs$")
@@ -732,9 +722,7 @@ async def enable_runs(run):
 async def metoo(hahayes):
     """ Haha yes """
     if not hahayes.text[0].isalpha() and hahayes.text[0] not in ("/", "#", "@", "!"):
-        index = random.randint(0, len(METOOSTR) - 1)
-        reply_text = METOOSTR[index]
-        await hahayes.edit(reply_text)
+        await hahayes.edit(random.choice(METOOSTR))
 
 @register(outgoing=True, pattern="^Oof$")
 async def Oof(e):
@@ -782,7 +770,7 @@ async def spongemocktext(mock):
         else:
             await mock.edit("`gIvE sOMEtHInG tO MoCk!`")
             return
-            
+
         for charac in message:
             if charac.isalpha() and random.randint(0, 1):
                 to_app = charac.upper() if charac.islower() else charac.lower()
