@@ -129,7 +129,7 @@ async def set_afk(afk_e):
         global ISAFK
         global AFKREASON
         REASON = afk_e.pattern_match.group(1)
-        if AFK_STRING:
+        if REASON:
             addgvar("AFK_REASON", REASON)
             await afk_e.edit(f"Going AFK !!\nReason: {REASON}")
         else:
