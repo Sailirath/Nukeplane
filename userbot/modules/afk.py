@@ -44,16 +44,13 @@ AFKSTR = [
         "I am not here right now...but if I was... wouldn't that be awesome?",
 ]
 
-ISAFK = gvarstatus("AFK_STATUS")
-AFKREASON = gvarstatus("AFK_REASON")
-
 @register(incoming=True, disable_edited=True)
 async def mention_afk(mention):
     """ This function takes care of notifying the people who mention you that you are AFK."""
     global COUNT_MSG
     global USERS
-    global ISAFK
-    global AFKREASON
+    ISAFK = gvarstatus("AFK_STATUS")
+    AFKREASON = gvarstatus("AFK_REASON")
     if mention.message.mentioned and not (await mention.get_sender()).bot:
         if ISAFK:
             if mention.sender_id not in USERS:
@@ -87,10 +84,10 @@ async def mention_afk(mention):
 @register(incoming=True, disable_edited=True)
 async def afk_on_pm(sender):
     """ Function which informs people that you are AFK in PM """
-    global ISAFK
+    ISAFK = gvarstatus("AFK_STATUS")
     global USERS
     global COUNT_MSG
-    global AFKREASON
+    AFKREASON = gvarstatus("AFK_REASON")
     if sender.is_private and not (await sender.get_sender()).bot:
         if ISAFK:
             if sender.sender_id not in USERS:
@@ -126,8 +123,8 @@ async def set_afk(afk_e):
     """ For .afk command, allows you to inform people that you are afk when they message you """
     if not afk_e.text[0].isalpha() and afk_e.text[0] not in ("/", "#", "@", "!"):
         message = afk_e.text
-        global ISAFK
-        global AFKREASON
+        ISAFK = gvarstatus("AFK_STATUS")
+        AFKREASON = gvarstatus("AFK_REASON")
         REASON = afk_e.pattern_match.group(1)
         if REASON:
             addgvar("AFK_REASON", REASON)
@@ -143,10 +140,10 @@ async def set_afk(afk_e):
 @register(outgoing=True)
 async def type_afk_is_not_true(notafk):
     """ This sets your status as not afk automatically when you write something while being afk """
-    global ISAFK
+    ISAFK = gvarstatus("AFK_STATUS")
     global COUNT_MSG
     global USERS
-    global AFKREASON
+    AFKREASON = gvarstatus("AFK_REASON")
     if ISAFK:
         delgvar("AFK_STATUS")
         await notafk.respond("I'm no longer AFK.")
