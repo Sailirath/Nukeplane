@@ -48,7 +48,7 @@ async def permitpm(event):
                     prevmsg = LASTMSG[event.chat_id]
                     # If the message doesn't same as previous one
                     # Send the Unapproved Message again
-                    if not event.text != prevmsg:
+                    if event.text != prevmsg:
                         pm_warn = await event.reply(UNAPPROVED_MSG)
                         LASTMSG.update({event.chat_id: event.text})
                     else:
