@@ -35,7 +35,7 @@ for module_name in ALL_MODULES:
 
 LOGS.info("Your Bot is now running! Test it by typing .alive in any chat."
           "If you need assistance, head to https://t.me/userbot_support")
-LOGS.info("Your Bot Version is 2.4.2")
+LOGS.info("Your Bot Version is 3.0-sql-extended")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
