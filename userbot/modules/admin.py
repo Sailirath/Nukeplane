@@ -405,8 +405,8 @@ async def spider(spdr):
                         f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                         f"CHAT: {spdr.chat.title}(`{spdr.chat_id}`)"
                     )
-                except UserIdInvalidError:
-                    return await spdr.edit("`Uh oh my unmute logic broke!`")
+            except UserIdInvalidError:
+                return await spdr.edit("`Uh oh my unmute logic broke!`")
 
 
 @register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
